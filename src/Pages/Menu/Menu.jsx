@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import MenuBanner from "./MenuBanner";
+import PopularMenu from "../Home/PopularMenu";
 
 const Menu = () => {
   return (
@@ -6,7 +8,16 @@ const Menu = () => {
       <Helmet>
         <title>Bistro Boss / Menu</title>
       </Helmet>
-      THis is Menu Section
+      <MenuBanner></MenuBanner>
+      <PopularMenu></PopularMenu>
+      <MenuBanner></MenuBanner>
+      <PopularMenu></PopularMenu>
+      <MenuBanner></MenuBanner>
+      <PopularMenu></PopularMenu>
+      <MenuBanner></MenuBanner>
+      <PopularMenu></PopularMenu>
+      <MenuBanner></MenuBanner>
+      <PopularMenu></PopularMenu>
     </div>
   );
 };

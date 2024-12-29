@@ -34,31 +34,31 @@ const Category = () => {
       >
         <SwiperSlide>
           <img src={img1} alt="" srcset="" />
-          <h3 className="md:text-4xl text-white uppercase -mt-16 text-center">
+          <h3 className="md:text-3xl text-white uppercase -mt-16 text-center">
             salad
           </h3>
         </SwiperSlide>
         <SwiperSlide>
           <img src={img2} alt="" srcset="" />
-          <h3 className="md:text-4xl text-white uppercase -mt-16 text-center">
+          <h3 className="md:text-3xl text-white uppercase -mt-16 text-center">
             Soups
           </h3>
         </SwiperSlide>
         <SwiperSlide>
           <img src={img3} alt="" srcset="" />
-          <h3 className="md:text-4xl text-white uppercase -mt-16 text-center">
+          <h3 className="md:text-3xl text-white uppercase -mt-16 text-center">
             pizzas
           </h3>
         </SwiperSlide>
         <SwiperSlide>
           <img src={img4} alt="" srcset="" />
-          <h3 className="md:text-4xl text-white uppercase -mt-16 text-center">
+          <h3 className="md:text-3xl text-white uppercase -mt-16 text-center">
             desserts
           </h3>
         </SwiperSlide>
         <SwiperSlide>
           <img src={img5} alt="" srcset="" />
-          <h3 className="md:text-4xl text-white uppercase -mt-16 text-center">
+          <h3 className="md:text-3xl text-white uppercase -mt-16 text-center">
             salad
           </h3>
         </SwiperSlide>
