@@ -58,7 +58,7 @@ const Menu = () => {
       <MenuCategory item={salad}></MenuCategory> 
       {/* soup */}
       <Cover
-        img={saladImg} 
+        img={soupImg} 
         title="soup"
         description="Soup is a comforting and flavorful dish, often served warm and made with a delicious blend of ingredients like vegetables, meats, and spices in a savory broth. It's perfect for soothing the soul and warming you up on any day!"
       ></Cover>
