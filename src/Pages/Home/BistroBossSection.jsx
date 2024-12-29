@@ -3,7 +3,7 @@ import img from "../../assets/home/chef-service.jpg";
 const BistroBossSection = () => {
   return (
     <div
-      className="relative bg-cover bg-center w-full h-[450px]"
+      className="relative bg-cover bg-center w-full h-[450px] bg-fixed"
       style={{ backgroundImage: `url(${img})` }}
     >
       <div className="flex items-center justify-center h-full ">
