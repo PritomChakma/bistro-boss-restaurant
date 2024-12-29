@@ -4,7 +4,7 @@ import "../FeaturedItem/Featured.css";
 
 const FeaturedItems = () => {
   return (
-    <div className="featured-items py-7 my-20 bg-fixed bg-slate-500 bg-opacity-40">
+    <div className="featured-items py-7 my-20 bg-fixed ">
       <HeadingTitle
         subHeading="<---Check it out--->"
         heading="FROM OUR MENU"

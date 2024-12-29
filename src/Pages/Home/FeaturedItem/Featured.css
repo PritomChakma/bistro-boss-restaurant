@@ -1,3 +1,8 @@
 .featured-items {
   background-image: url("../../../assets/home/featured.jpg");
+  background-color: rgba(0, 0, 0, 0.5);
+  background-blend-mode: overlay;
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 }
