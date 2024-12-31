@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import MenuItems from "../Shared/FoodMenu/MenuItems";
 
-const MenuCategory = ({ item }) => {
-  const {title}= item
+const MenuCategory = ({ item, title }) => {
+  // const {title}= item
   return (
     <div>
       <div className="grid md:grid-cols-2 gap-4 md:gap-10 my-10">
