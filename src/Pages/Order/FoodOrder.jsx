@@ -1,21 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css"; // Default styles for react-tabs
 import bannerImg from "../../assets/shop/banner2.jpg";
-import useMenu from "../../Hook/useMenu";
+// import useMenu from "../../Hook/useMenu";
 import Cover from "../Shared/Cover/Cover";
 import FoodTabs from "../Shared/FoodTabs";
 
+import { useLoaderData } from "react-router-dom";
+// import useMenu from "../../Hook/useMenu";
+
 const FoodOrder = () => {
   const [tabIndex, setTabIndex] = useState(0);
-  const [menu] = useMenu();
+  const menu = useLoaderData()
+  console.log(menu);
+  // const [menu] = useMenu();
+  // const [menu, setMenu]= useState([])
+  // console.log(menu);
   const drinks = menu.filter((item) => item.category === "drinks");
   const desserts = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const salad = menu.filter((item) => item.category === "salad");
   const soup = menu.filter((item) => item.category === "soup");
 
+
+
+
+
   return (
+
     <div>
       {/* Banner */}
       <Cover

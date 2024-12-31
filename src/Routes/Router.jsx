@@ -10,16 +10,17 @@ const router = createBrowserRouter([
     element: <MainLayout></MainLayout>,
     children: [
       {
-        path: "/",
+        path: "",
         element: <Home></Home>,
       },
       {
-        path: "/menu",
+        path: "menu",
         element: <Menu></Menu>,
       },
       {
-        path: "/foodOrder/:id",
+        path: "foodOrder/:category",
         element: <FoodOrder></FoodOrder>,
+        loader:()=>fetch("/menu.json")
       },
     ],
   },
