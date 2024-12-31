@@ -1,10 +1,25 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext); // Assume 'logout' is available from AuthContext
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logged out successfully");
+      })
+      .catch((err) => {
+        toast.error("Logout error:", err);
+      });
+  };
+
   const NavOption = (
     <>
       <li>
-       <Link to="/">Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
         <Link to="/menu">Menu</Link>
@@ -57,8 +72,11 @@ const Navbar = () => {
             >
               <div className="w-10 rounded-full">
                 <img
-                  alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  alt="Profile"
+                  src={
+                    user?.photoURL ||
+                    "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  }
                 />
               </div>
             </div>
@@ -73,7 +91,11 @@ const Navbar = () => {
                 <a>Settings</a>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                {user ? (
+                  <button onClick={handleLogout}>Logout</button>
+                ) : (
+                  <Link to="/login">Login</Link>
+                )}
               </li>
             </ul>
           </div>
