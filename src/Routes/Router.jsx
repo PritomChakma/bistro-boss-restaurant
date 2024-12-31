@@ -3,6 +3,7 @@ import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home";
 import Menu from "../Pages/Menu/Menu";
 import FoodOrder from "../Pages/Order/FoodOrder";
+import Login from "../Pages/Login/Login";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
         path: "foodOrder/:category",
         element: <FoodOrder></FoodOrder>,
         loader:()=>fetch("/menu.json")
+      },
+      {
+        path: "/login",
+        element: <Login></Login>
       },
     ],
   },
