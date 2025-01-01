@@ -10,6 +10,7 @@ const Navbar = () => {
   const [cart] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
+
   const form = location.state?.form?.pathname || "/";
   const handleLogout = () => {
     logOut()

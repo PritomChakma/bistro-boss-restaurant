@@ -3,10 +3,12 @@ import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
+import useCart from "../../Hook/useCart";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const FoodCard = ({ item }) => {
   const { user } = useContext(AuthContext);
+  const [,refetch] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const axiosSecure = useAxiosSecure();
@@ -31,6 +33,7 @@ const FoodCard = ({ item }) => {
             icon: "success",
             draggable: true,
           });
+          refetch();
         }
       });
     } else {
