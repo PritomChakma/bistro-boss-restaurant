@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
-import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../Hook/useAxiosSecure";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const FoodCard = ({ item }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosSecure = useAxiosSecure();
   const { name, recipe, image, price, _id } = item;
   const handleAddCart = (food) => {
     if (user && user.email) {
@@ -22,18 +23,16 @@ const FoodCard = ({ item }) => {
         price,
       };
 
-axios.post("http://localhost:5000/carts", cartItems)
-.then(res =>{
-  console.log(res.data)
-  if(res.data.insertedId){
-    Swal.fire({
-      title: `${name} Added Successfully!`,
-      icon: "success",
-      draggable: true
-    });
-  }
-})
-
+      axiosSecure.post("carts", cartItems).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: `${name} Added Successfully!`,
+            icon: "success",
+            draggable: true,
+          });
+        }
+      });
     } else {
       toast.error("Please Login");
       navigate("/login", { state: { from: location } });

@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import toast from "react-hot-toast";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
 import { FaCartShopping } from "react-icons/fa6";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useCart from "../../Hook/useCart";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
   const navigate = useNavigate();
   const location = useLocation();
   const form = location.state?.form?.pathname || "/";
@@ -34,8 +36,8 @@ const Navbar = () => {
       <li>
         <Link to="/">
           <button className="flex items-center">
-          <FaCartShopping className="text-xl"/>
-            <div className="badge badge-secondary ml-1">+0</div>
+            <FaCartShopping className="text-xl" />
+            <div className="badge badge-secondary ml-1">+{cart.length}</div>
           </button>
         </Link>
       </li>
