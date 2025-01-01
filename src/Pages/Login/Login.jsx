@@ -15,9 +15,6 @@ const Login = () => {
 
   useEffect(() => {
     loadCaptchaEnginge(6);
-    return () => {
-      loadCaptchaEnginge(6);
-    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -25,7 +22,7 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-
+console.log(email,password);
     signIn(email, password)
       .then((result) => {
         const user = result.user;
@@ -103,7 +100,7 @@ const Login = () => {
                   <LoadCanvasTemplate />
                 </label>
                 <input
-                  onChange={handleCaptcha}
+                  onBlur={handleCaptcha}
                   type="text"
                   name="captcha"
                   placeholder="Type The Captcha"
