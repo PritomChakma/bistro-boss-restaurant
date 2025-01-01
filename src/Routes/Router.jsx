@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Home";
+import Login from "../Pages/Login/Login";
 import Menu from "../Pages/Menu/Menu";
 import FoodOrder from "../Pages/Order/FoodOrder";
-import Login from "../Pages/Login/Login";
+import Secret from "../Pages/Shared/Secret/Secret";
 import Signup from "../Pages/Signup/Signup";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -22,15 +24,23 @@ const router = createBrowserRouter([
       {
         path: "foodOrder/:category",
         element: <FoodOrder></FoodOrder>,
-        loader:()=>fetch("/menu.json")
+        loader: () => fetch("/menu.json"),
       },
       {
         path: "/login",
-        element: <Login></Login>
+        element: <Login></Login>,
       },
       {
         path: "/signup",
-        element: <Signup></Signup>
+        element: <Signup></Signup>,
+      },
+      {
+        path: "/secret",
+        element: (
+          <PrivateRoutes>
+            <Secret></Secret>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

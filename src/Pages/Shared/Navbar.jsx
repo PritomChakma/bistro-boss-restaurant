@@ -1,14 +1,18 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { FaCartShopping } from "react-icons/fa6";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext); // Assume 'logout' is available from AuthContext
-
+  const { user, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const form = location.state?.form?.pathname || "/";
   const handleLogout = () => {
     logOut()
       .then(() => {
+        navigate(form, { replace: true });
         toast.success("Logged out successfully");
       })
       .catch((err) => {
@@ -26,6 +30,17 @@ const Navbar = () => {
       </li>
       <li>
         <Link to="/foodOrder/salad">Food Order</Link>
+      </li>
+      <li>
+        <Link to="/">
+          <button className="flex items-center">
+          <FaCartShopping className="text-xl"/>
+            <div className="badge badge-secondary ml-1">+0</div>
+          </button>
+        </Link>
+      </li>
+      <li>
+        <Link to="/secret">Secret</Link>
       </li>
     </>
   );
@@ -72,6 +87,7 @@ const Navbar = () => {
             >
               <div className="w-10 rounded-full">
                 <img
+                  referrerPolicy="no-referrer"
                   alt="Profile"
                   src={
                     user?.photoURL ||

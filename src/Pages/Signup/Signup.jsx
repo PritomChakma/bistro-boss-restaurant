@@ -1,24 +1,35 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Signup = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
-    createUser(data.email, data.password)
-    .then(result =>{
-        const loggedUser = result.user
-        console.log(loggedUser);
-    })
+    createUser(data.email, data.password).then((result) => {
+      const loggedUser = result.user;
+      console.log(loggedUser);
+      updateUserProfile(data.name, data.photoURL)
+        .then(() => {
+          console.log("user profile info updated");
+          reset();
+          toast.success("User Create Successfully")
+          navigate("/")
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    });
     console.log(data);
   };
 
@@ -55,6 +66,21 @@ const Signup = () => {
                   <span className="text-red-500">Name is required</span>
                 )}
               </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo Url</span>
+                </label>
+                <input
+                  {...register("photoURL", { required: true })}
+                  type="text"
+                  placeholder="Enter Your Name"
+                  className="input input-bordered"
+                />
+                {errors.photoURL && (
+                  <span className="text-red-500">Photo URL is required</span>
+                )}
+              </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>

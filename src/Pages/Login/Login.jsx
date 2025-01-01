@@ -1,33 +1,30 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
-import {
-  LoadCanvasTemplate,
-  loadCaptchaEnginge,
-  validateCaptcha,
-} from "react-simple-captcha";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { Link } from "react-router-dom";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
-  const [disabled, setDisabled] = useState(true);
+  const navigate =useNavigate()
+  // const [disabled, setDisabled] = useState(true);
 
-  useEffect(() => {
-    loadCaptchaEnginge(6);
-  }, []);
+  // useEffect(() => {
+  //   loadCaptchaEnginge(6);
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-console.log(email,password);
+    console.log(email, password);
     signIn(email, password)
       .then((result) => {
         const user = result.user;
         console.log(user);
         toast.success("Login successful!");
+        navigate("/")
       })
       .catch((error) => {
         let errorMessage = "Login failed! Please try again.";
@@ -42,17 +39,17 @@ console.log(email,password);
       });
   };
 
-  const handleCaptcha = (e) => {
-    const value = e.target.value;
-    if (validateCaptcha(value)) {
-      setDisabled(false);
-      toast.success("Captcha validated successfully!");
-    } else {
-      setDisabled(true);
-      loadCaptchaEnginge(6);
-      toast.error("Captcha does not match. Please try again.");
-    }
-  };
+  // const handleCaptcha = (e) => {
+  //   const value = e.target.value;
+  //   if (validateCaptcha(value)) {
+  //     setDisabled(false);
+  //     toast.success("Captcha validated successfully!");
+  //   } else {
+  //     setDisabled(true);
+  //     loadCaptchaEnginge(6);
+  //     toast.error("Captcha does not match. Please try again.");
+  //   }
+  // };
 
   return (
     <div>
@@ -95,10 +92,8 @@ console.log(email,password);
                   required
                 />
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <LoadCanvasTemplate />
-                </label>
+              {/* <div className="form-control">
+                <label className="label"><LoadCanvasTemplate /></label>
                 <input
                   onBlur={handleCaptcha}
                   type="text"
@@ -107,9 +102,12 @@ console.log(email,password);
                   className="input input-bordered"
                   required
                 />
-              </div>
+              </div> */}
               <div className="form-control mt-6">
-                <button disabled={disabled} className="btn btn-primary">
+                <button
+                  //  disabled={disabled}
+                  className="btn btn-primary"
+                >
                   Login
                 </button>
               </div>
