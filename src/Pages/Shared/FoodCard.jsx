@@ -1,19 +1,43 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const FoodCard = ({ item }) => {
   const { user } = useContext(AuthContext);
-  const navigate = useNavigate()
-  const { name, recipe, image, price } = item;
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { name, recipe, image, price, _id } = item;
   const handleAddCart = (food) => {
-   if(user&& user.email){
-// send item to the database
-   }else{
-    toast.error("Please Login")
-    navigate("/login")
-   }
+    if (user && user.email) {
+      // send item to the database
+      console.log(user.email, food);
+      const cartItems = {
+        menuId: _id,
+        email: user.email,
+        name,
+        image,
+        price,
+      };
+
+axios.post("http://localhost:5000/carts", cartItems)
+.then(res =>{
+  console.log(res.data)
+  if(res.data.insertedId){
+    Swal.fire({
+      title: `${name} Added Successfully!`,
+      icon: "success",
+      draggable: true
+    });
+  }
+})
+
+    } else {
+      toast.error("Please Login");
+      navigate("/login", { state: { from: location } });
+    }
   };
   return (
     <div className="card bg-base-100 w-full sm:w-96 shadow-xl">

@@ -1,18 +1,21 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
   const navigate =useNavigate()
+  const location= useLocation()
   // const [disabled, setDisabled] = useState(true);
 
   // useEffect(() => {
   //   loadCaptchaEnginge(6);
   // }, []);
 
+const form =location.pathname.state?.from?.pathname || "/"
+console.log("state in the location", location.state)
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
