@@ -1,13 +1,17 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../Hook/useAxiosPublic";
+import { AuthContext } from "../../Provider/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Signup = () => {
+  const axiosPublic = useAxiosPublic();
   const { createUser, updateUserProfile } = useContext(AuthContext);
-  const navigate = useNavigate()
+
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,12 +23,22 @@ const Signup = () => {
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
+
       updateUserProfile(data.name, data.photoURL)
         .then(() => {
-          console.log("user profile info updated");
-          reset();
-          toast.success("User Create Successfully")
-          navigate("/")
+          // console.log("user profile info updated");
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user added in database")
+              reset();
+              toast.success("User Create Successfully");
+              navigate("/");
+            }
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -134,11 +148,14 @@ const Signup = () => {
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Signup</button>
               </div>
+              <SocialLogin></SocialLogin>
             </form>
             <p className="text-center pb-3">
               <small>Already Registered?</small>
               <Link to="/login">Go to Login</Link>
             </p>
+
+        
           </div>
         </div>
       </div>

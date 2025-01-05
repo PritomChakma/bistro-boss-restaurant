@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import SocialLogin from "../Shared/SocialLogin/SocialLogin";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -114,6 +115,7 @@ console.log("state in the location", location.state)
                   Login
                 </button>
               </div>
+              <SocialLogin></SocialLogin>
             </form>
             <p className="text-center pb-3">
               <small>New Here?</small>

@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../Layout/Dashboard";
 import MainLayout from "../Layout/MainLayout";
+import Cart from "../Pages/Dashboard/Cart/Cart";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login/Login";
 import Menu from "../Pages/Menu/Menu";
@@ -7,8 +9,6 @@ import FoodOrder from "../Pages/Order/FoodOrder";
 import Secret from "../Pages/Shared/Secret/Secret";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoutes from "./PrivateRoutes";
-import Dashboard from "../Layout/Dashboard";
-import Cart from "../Pages/Dashboard/Cart/Cart";
 
 const router = createBrowserRouter([
   {
@@ -47,15 +47,19 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:"/dashboard",
-    element:<Dashboard></Dashboard>,
-    children:[
+    path: "/dashboard",
+    element: (
+      <PrivateRoutes>
+        <Dashboard></Dashboard>
+      </PrivateRoutes>
+    ),
+    children: [
       {
-        path:"cart",
-        element:<Cart></Cart>
-      }
-    ]
-  }
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+    ],
+  },
 ]);
 
 export default router;
