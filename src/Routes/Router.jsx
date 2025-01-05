@@ -9,6 +9,7 @@ import FoodOrder from "../Pages/Order/FoodOrder";
 import Secret from "../Pages/Shared/Secret/Secret";
 import Signup from "../Pages/Signup/Signup";
 import PrivateRoutes from "./PrivateRoutes";
+import AllUser from "../Pages/Dashboard/AllUser/AllUser";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,11 @@ const router = createBrowserRouter([
         path: "cart",
         element: <Cart></Cart>,
       },
+      // for admin
+      {
+        path:"allUsers",
+        element:<AllUser></AllUser>
+      }
     ],
   },
 ]);

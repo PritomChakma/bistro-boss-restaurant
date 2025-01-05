@@ -1,17 +1,26 @@
 import { useContext } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const SocialLogin = () => {
   const { googleLogin } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const handleGoogleLogin = () => {
     googleLogin()
       .then((result) => {
-        navigate("/");
-        toast.success("Login successfully with Google");
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+        };
+        axiosPublic.post("/users", userInfo).then((res) => {
+          console.log(res.data);
+          navigate("/");
+          toast.success("Login successfully with Google");
+        });
       })
       .catch((error) => {
         toast.error("Google Login failed. Please try again.");
