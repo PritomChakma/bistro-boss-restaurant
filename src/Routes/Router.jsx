@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Dashboard from "../Layout/Dashboard";
 import MainLayout from "../Layout/MainLayout";
+import AllUser from "../Pages/Dashboard/AllUser/AllUser";
 import Cart from "../Pages/Dashboard/Cart/Cart";
 import Home from "../Pages/Home";
 import Login from "../Pages/Login/Login";
@@ -8,10 +9,12 @@ import Menu from "../Pages/Menu/Menu";
 import FoodOrder from "../Pages/Order/FoodOrder";
 import Secret from "../Pages/Shared/Secret/Secret";
 import Signup from "../Pages/Signup/Signup";
+import Additem from "../assets/dashboard/AddItem/Additem";
+import AdminRoute from "./AdminRoute";
 import PrivateRoutes from "./PrivateRoutes";
-import AllUser from "../Pages/Dashboard/AllUser/AllUser";
 
 const router = createBrowserRouter([
+  // normal user routes
   {
     path: "/",
     element: <MainLayout></MainLayout>,
@@ -59,11 +62,22 @@ const router = createBrowserRouter([
         path: "cart",
         element: <Cart></Cart>,
       },
-      // for admin
       {
-        path:"allUsers",
-        element:<AllUser></AllUser>
-      }
+        path: "addItem",
+        element: (
+          <AdminRoute>
+            <Additem></Additem>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "users",
+        element: (
+          <AdminRoute>
+            <AllUser></AllUser>
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);

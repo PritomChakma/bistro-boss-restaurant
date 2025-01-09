@@ -12,10 +12,11 @@ import { IoHome } from "react-icons/io5";
 import { MdOutlineRateReview, MdPayment } from "react-icons/md";
 import { TbBrandBooking } from "react-icons/tb";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../Hook/useAdmin";
 import useCart from "../Hook/useCart";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
   const [cart] = useCart();
   return (
     <div className="flex">
